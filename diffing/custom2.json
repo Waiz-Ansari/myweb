@@ -1,0 +1,10 @@
+{
+    "name": "shahab",
+    "age": 34,
+    "address": {
+      "city": "Karachi"
+    },
+    "hobbies": ["reading", "swimming", "running","waiz" ,"shahab","bilal"]
+  }
+
+  

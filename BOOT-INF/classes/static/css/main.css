@@ -1,0 +1,82 @@
+.m-15{
+    margin: 15px;
+}
+
+.m-b-15{
+    margin-bottom: 15px;
+}
+.m-l-15{
+    margin-left: 15px;
+}
+.m-t-15{
+    margin-top: 15px;
+}
+
+.text-red{
+    color: #cc3333;
+}
+
+body{
+    padding: 15px;
+}
+ul{
+    list-style: none;
+}
+.parsley-errors-list{
+    color: #cc3333;
+    padding: 0;
+}
+.import-form{
+    margin-top: 20px;
+}
+
+.grey{
+    color: #8c8c8c;
+}
+
+.protocolList{
+    padding: 15px 0;
+    overflow: hidden;
+}
+pre {
+    min-height: 200px;
+    padding: 5px;
+    margin: 0;
+    position: relative;
+}
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
+
+.version{
+    position: fixed;
+    bottom: 0;
+    right:5px;
+}
+
+#errorList a:visited{
+    color: #551A8B;
+}
+
+#testResult .errorNo{
+    position: absolute;
+    left: 1px;
+}
+#testPanel{
+    position: fixed;
+}
+#errorListPanel{
+    position: fixed;
+    right: 0;
+    overflow: auto;
+}
+.scroTo{
+    cursor: pointer;
+}
+.table .operation{
+    cursor: pointer;
+    color: #DD1144;
+    font-weight: bold;
+}

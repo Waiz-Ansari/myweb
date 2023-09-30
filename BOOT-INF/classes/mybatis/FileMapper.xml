@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.queclink.protocol.dao.FileDao">
+
+    <select id="get" resultType="com.queclink.protocol.domain.FileDO">
+        select `id`,
+               `file_name`,
+               `file_version`,
+               `protocol_version`,
+               `create_name`,
+               `create_time`,
+               `is_delete`,
+               `kit_version`,
+               `upload_ip`
+        from ru_file
+        where id = #{value}
+    </select>
+
+    <select id="list" resultType="com.queclink.protocol.domain.FileDO">
+        select
+        `id`,`file_name`,`file_version`,`protocol_version`,`create_name`,`create_time`,`is_delete`,`kit_version`,`upload_ip`
+        from ru_file
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="fileName != null and fileName != ''">and file_name LIKE CONCAT('%',#{fileName},'%')</if>
+            <if test="fileVersion != null and fileVersion != ''">and file_version LIKE CONCAT('%',#{fileVersion},'%')
+            </if>
+            <if test="protocolVersion != null and protocolVersion != ''">and protocol_version LIKE
+                CONCAT('%',#{protocolVersion},'%')
+            </if>
+            <if test="createName != null and createName != ''">and create_name LIKE CONCAT('%',#{createName},'%')</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="isDelete != null and isDelete != ''">and is_delete = #{isDelete}</if>
+            <if test="kitVersion != null and kitVersion != ''">and kit_version = #{kitVersion}</if>
+            <if test="uploadIp != null and uploadIp != ''">and upload_ip = #{uploadIp}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from ru_file
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="fileName != null and fileName != ''">and file_name = #{fileName}</if>
+            <if test="fileVersion != null and fileVersion != ''">and file_version = #{fileVersion}</if>
+            <if test="protocolVersion != null and protocolVersion != ''">and protocol_version = #{protocolVersion}</if>
+            <if test="createName != null and createName != ''">and create_name = #{createName}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="isDelete != null and isDelete != ''">and is_delete = #{isDelete}</if>
+            <if test="kitVersion != null and kitVersion != ''">and kit_version = #{kitVersion}</if>
+            <if test="uploadIp != null and uploadIp != ''">and upload_ip = #{uploadIp}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.queclink.protocol.domain.FileDO" useGeneratedKeys="true" keyProperty="id">
+        insert into ru_file
+        (`file_name`,
+         `file_version`,
+         `protocol_version`,
+         `create_name`,
+         `create_time`,
+         `is_delete`,
+         `kit_version`,
+         `upload_ip`)
+        values (#{fileName},
+                #{fileVersion},
+                #{protocolVersion},
+                #{createName},
+                #{createTime},
+                #{isDelete},
+                #{kitVersion},
+                #{uploadIp})
+    </insert>
+
+    <update id="update" parameterType="com.queclink.protocol.domain.FileDO">
+        update ru_file
+        <set>
+            <if test="fileName != null">`file_name` = #{fileName},</if>
+            <if test="fileVersion != null">`file_version` = #{fileVersion},</if>
+            <if test="protocolVersion != null">`protocol_version` = #{protocolVersion},</if>
+            <if test="createName != null">`create_name` = #{createName},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="isDelete != null">`is_delete` = #{isDelete},</if>
+            <if test="kitVersion != null ">kit_version = #{kitVersion},</if>
+            <if test="uploadIp != null ">upload_ip = #{uploadIp}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+        delete
+        from ru_file
+        where id = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from ru_file where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getVersion" resultType="java.lang.String">
+        SELECT DISTINCT protocol_version
+        FROM ru_file
+        ORDER BY protocol_version DESC
+    </select>
+
+    <select id="getVersionByProject" resultType="java.lang.String">
+        SELECT DISTINCT protocol_version
+        FROM ru_file
+        WHERE protocol_version LIKE '${project}%'
+        ORDER BY protocol_version DESC
+    </select>
+
+    <select id="getHexVersion" resultType="java.lang.String">
+        SELECT DISTINCT protocol_version
+        FROM ru_file
+        WHERE file_name LIKE "%HEX%"
+          AND protocol_version LIKE ‘${deviceType}%’
+        ORDER BY protocol_version DESC
+    </select>
+
+    <select id="getAllHexVersion" resultType="java.lang.String">
+        SELECT DISTINCT protocol_version
+        FROM ru_file
+        WHERE file_name LIKE "%HEX%"
+        ORDER BY protocol_version DESC
+    </select>
+
+
+</mapper>

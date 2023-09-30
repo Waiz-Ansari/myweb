@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.queclink.protocol.dao.ProtocolContentDao">
+
+    <select id="get" resultType="com.queclink.protocol.domain.ProtocolContentDO">
+		select `id`,`file_id`,`rule_version`,`parameter`,`length`,`format`,`Default`,`relevant`,`create_time`,`modified_time` from ru_protocol_content where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.queclink.protocol.domain.ProtocolContentDO">
+        select
+        `id`,`file_id`,`rule_version`,`parameter`,`length`,`format`,`Default`,`relevant`,`create_time`,`modified_time`
+        from ru_protocol_content
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="fileId != null and fileId != ''">and file_id = #{fileId}</if>
+            <if test="ruleVersion != null and ruleVersion != ''">and rule_version LIKE CONCAT('%',#{ruleVersion},'%')
+            </if>
+            <if test="parameter != null and parameter != ''">and parameter = #{parameter}</if>
+            <if test="length != null and length != ''">and length = #{length}</if>
+            <if test="format != null and format != ''">and format = #{format}</if>
+            <if test="Default != null and Default != ''">and Default = #{Default}</if>
+            <if test="relevant != null and relevant != ''">and relevant = #{relevant}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="modifiedTime != null and modifiedTime != ''">and modified_time = #{modifiedTime}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id asc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from ru_protocol_content
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="fileId != null and fileId != ''">and file_id = #{fileId}</if>
+            <if test="ruleVersion != null and ruleVersion != ''">and rule_version = #{ruleVersion}</if>
+            <if test="parameter != null and parameter != ''">and parameter = #{parameter}</if>
+            <if test="length != null and length != ''">and length = #{length}</if>
+            <if test="format != null and format != ''">and format = #{format}</if>
+            <if test="Default != null and Default != ''">and Default = #{Default}</if>
+            <if test="relevant != null and relevant != ''">and relevant = #{relevant}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="modifiedTime != null and modifiedTime != ''">and modified_time = #{modifiedTime}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.queclink.protocol.domain.ProtocolContentDO" useGeneratedKeys="true"
+            keyProperty="id">
+		insert into ru_protocol_content
+		(
+			`file_id`, 
+			`rule_version`, 
+			`parameter`, 
+			`length`, 
+			`format`, 
+			`Default`, 
+			`relevant`, 
+			`create_time`, 
+			`modified_time`
+		)
+		values
+		(
+			#{fileId}, 
+			#{ruleVersion}, 
+			#{parameter}, 
+			#{length}, 
+			#{format}, 
+			#{Default}, 
+			#{relevant}, 
+			#{createTime}, 
+			#{modifiedTime}
+		)
+	</insert>
+
+    <insert id="batchSave" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into ru_protocol_content
+        (
+        `file_id`,
+        `rule_version`,
+        `parameter`,
+        `length`,
+        `format`,
+        `Default`,
+        `relevant`,
+        `create_time`,
+        `modified_time`
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.fileId},
+            #{item.ruleVersion},
+            #{item.parameter},
+            #{item.length},
+            #{item.format},
+            #{item.Default},
+            #{item.relevant},
+            #{item.createTime},
+            #{item.modifiedTime}
+            )
+        </foreach>
+    </insert>
+
+
+    <update id="update" parameterType="com.queclink.protocol.domain.ProtocolContentDO">
+        update ru_protocol_content
+        <set>
+            <if test="fileId != null">`file_id` = #{fileId},</if>
+            <if test="ruleVersion != null">`rule_version` = #{ruleVersion},</if>
+            <if test="parameter != null">`parameter` = #{parameter},</if>
+            <if test="length != null">`length` = #{length},</if>
+            <if test="format != null">`format` = #{format},</if>
+            <if test="Default != null">`Default` = #{Default},</if>
+            <if test="relevant != null">`relevant` = #{relevant},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="modifiedTime != null">`modified_time` = #{modifiedTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from ru_protocol_content where id = #{value}
+	</delete>
+
+    <delete id="removeByruleVersion">
+        delete from ru_protocol_content where rule_version = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from ru_protocol_content where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="listRuleVersion" resultType="com.queclink.protocol.domain.ProtocolContentDO">
+        select DISTINCT `rule_version`,`file_id`,file_name,pr.`create_time` from ru_protocol_content pr JOIN ru_file fi
+        ON pr.file_id = fi.id
+        <where>
+            <if test="ruleVersion != null and ruleVersion != ''">rule_version LIKE CONCAT('%',#{ruleVersion},'%')</if>
+        </where>
+
+    </select>
+
+    <select id="listByRuleVersion" resultType="com.queclink.protocol.common.domain.ProtocolDo">
+        select `parameter`,`length`,`format`,`Default`,`relevant`
+        from ru_protocol_content WHERE rule_version = #{ruleVersion} order by id asc
+    </select>
+
+    <select id="distinctList" resultType="com.queclink.protocol.domain.ProtocolContentDO">
+        SELECT `rule_version`,`parameter`,`length`,`format`
+        FROM ru_protocol_content
+        <where>
+            <if test="createTime != null and createTime != ''">and create_time &gt;= #{createTime}</if>
+        </where>
+        GROUP BY format,length
+    </select>
+
+    <select id="distinctRuleList" resultType="String">
+        SELECT DISTINCT rule_version FROM ru_protocol_content where rule_version LIKE "GT%"
+    </select>
+    
+</mapper>

@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven 3.3.9
+Built-By: NCC
+Build-Jdk: 11.0.10
+Implementation-Title: queclink-protocol-middleware
+Implementation-Version: 1.1.138
+Implementation-Vendor-Id: com.queclink.protocol
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/QPAK
+Main-Class: org.springframework.boot.loader.JarLauncher
+Start-Class: com.queclink.protocol.QueclinkProtocolAnalyzeKitApplication
+Spring-Boot-Version: 2.1.4.RELEASE
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+

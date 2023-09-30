@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Queclink Protocol Analysis Kit</title>
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+    <div class="row m-b-15">
+        <div class="col-xs-3">
+           <input class="form-control" id="length" placeholder="Length">
+        </div>
+        <div class="col-xs-3">
+            <input class="form-control" id="format" placeholder="Range/Format">
+        </div>
+        <div class="col-xs-3">
+            <button class="btn btn-primary" id="search" >Search</button>
+        </div>
+        <div class="col-xs-3 text-right">
+            <button class="btn btn-primary" id="add" >Add</button>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover" id="regList"></table>
+    <div id="setInfo" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Add</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" autocomplete="off">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">Length (Byte)<span class="text-red">*</span></label>
+                            <div class="col-xs-9">
+                                <input name="length" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">Range/Format<span class="text-red">*</span></label>
+                            <div class="col-xs-9">
+                                <input name="format" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">RegEx<span class="text-red">*</span></label>
+                            <div class="col-xs-9">
+                                <input name="regex" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="submit" class="btn btn-primary ladda-button m-r-15" data-style="zoom-in"><span class="ladda-label">Submit</span></button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirm" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Confirm</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirmBtn" class="btn btn-primary ladda-button m-r-15" data-style="zoom-in"><span class="ladda-label">Yes</span></button>
+                    <button id="cancelBtn" class="btn btn-default ladda-button" data-style="zoom-in"><span class="ladda-label">No</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="version">Version:<span th:text="${VERSION}"></span></span>
+    <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+    <!--<script type="text/javascript" src="assets/bootstrap/popper.min.js"></script>-->
+    <script type="text/javascript" src="assets/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-table/bootstrap-table.js"></script>
+    <!--<script type="text/javascript" src="assets/bootstrap-table/bootstrap-table-zh-CN.js"></script>-->
+    <script type="text/javascript" src="assets/ladda/spin.min.js"></script>
+    <script type="text/javascript" src="assets/ladda/ladda.min.js"></script>
+    <script type="text/javascript" src="assets/parsley/parsley.min.js"></script>
+    <!--<script type="text/javascript" src="assets/parsley/zh_cn.js"></script>-->
+    <script type="text/javascript" src="js/regDictionary.js"></script>
+</body>
+</html>

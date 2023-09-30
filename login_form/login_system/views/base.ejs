@@ -1,0 +1,32 @@
+<%-include('heder')-%>
+    
+
+
+<div class="text-center center-div" id="login">
+    <div class="container container-b w-22 border py-5" id="dive_2">
+        <div class="title pb-2">
+            <h2 class="font-weight-bold text-white">Login System</h2>
+            <span>Please login with Existing User</span>
+            <% if(locals.logout){%>
+                <div class="alter alert-success text-center">
+                <%= logout %>
+                    <!-- logout successfullt! -->
+                </div>
+                <% } %>
+        </div>
+        <form action="/route/login" method="post" class="pt-3">
+            <div class="form-group mb-3">
+                <input type="email" class="form-control rounded-pill" placeholder="Email" name="email">
+                <small class="form-text text-muted text-left"></small>
+            </div>
+            <div class="form-group ">
+                <input type="password" mb-2 class="form-control rounded-pill" placeholder="Password" name="password">
+                <small class="form-text text-muted text-left"></small>
+            </div>
+            <button type="submit" w-2 class="btn btn-primary rounded-pill">Login</button>
+        </form>
+    </div>
+</div>
+
+
+</%-include('footer')-%>

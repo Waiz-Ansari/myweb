@@ -1,0 +1,13 @@
+<%-include('heder')-%>
+    
+
+<div class=" text-center-div mt-5" id="dashboard">
+    <div class="container  border py-5 mt-5" id="login-dash">
+        <h3>welcome to express dashboard</h3>
+        <h5><%= locals.user ? user:"user" %></h5>
+        <a href="/route/logout">Logout</a>
+    </div>
+</div>
+
+
+</%-include('footer')-%>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.queclink.protocol.dao.RegexDao">
+
+    <select id="get" resultType="com.queclink.protocol.domain.RegexDO">
+        select `id`, `length`, `format`, `regex`, `create_time`, `modified_time`, `is_delete`
+        from ru_regex
+        where id = #{value}
+    </select>
+
+    <select id="getRegex" resultType="String">
+        select `regex`
+        from ru_regex
+        where `length` = #{length}
+          and format = #{format}
+          and is_delete = 0 limit 0,1
+    </select>
+
+    <select id="list" resultType="com.queclink.protocol.domain.RegexDO">
+        select `id`,`length`,`format`,`regex`,`create_time`,`modified_time`,`is_delete` from ru_regex
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="length != null and length != ''">and length = #{length}</if>
+            <if test="format != null and format != ''">and format = #{format}</if>
+            <if test="regex != null and regex != ''">and regex = #{regex}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="modifiedTime != null and modifiedTime != ''">and modified_time = #{modifiedTime}</if>
+            <if test="isDelete != null and isDelete != ''">and is_delete = #{isDelete}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from ru_regex
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="length != null and length != ''">and `length`= #{length}</if>
+            <if test="format != null and format != ''">and format = #{format}</if>
+            <if test="regex != null and regex != ''">and regex = #{regex}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="modifiedTime != null and modifiedTime != ''">and modified_time = #{modifiedTime}</if>
+            <if test="isDelete != null and isDelete != ''">and is_delete = #{isDelete}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.queclink.protocol.domain.RegexDO">
+        insert into ru_regex
+        (`id`,
+         `length`,
+         `format`,
+         `regex`,
+         `create_time`,
+         `modified_time`,
+         `is_delete`)
+        values (#{id},
+                #{length},
+                #{format},
+                #{regex},
+                #{createTime},
+                #{modifiedTime},
+                #{isDelete})
+    </insert>
+
+    <insert id="batchSave" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into ru_regex
+        (
+        `length`,
+        `format`,
+        `regex`,
+        `create_time`,
+        `modified_time`,
+        `is_delete`
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.length},
+            #{item.format},
+            #{item.regex},
+            #{item.createTime},
+            #{item.modifiedTime},
+            #{item.isDelete}
+            )
+        </foreach>
+    </insert>
+
+
+    <update id="update" parameterType="com.queclink.protocol.domain.RegexDO">
+        update ru_regex
+        <set>
+            <if test="length != null">`length` = #{length},</if>
+            <if test="format != null">`format` = #{format},</if>
+            <if test="regex != null">`regex` = #{regex},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="modifiedTime != null">`modified_time` = #{modifiedTime},</if>
+            <if test="isDelete != null">`is_delete` = #{isDelete}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+        delete
+        from ru_regex
+        where id = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from ru_regex where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="delete">
+        delete
+        from ru_regex
+        where `length` = #{length}
+          and format = #{format}
+    </delete>
+
+    <select id="getlist" resultType="com.queclink.protocol.domain.RegexDO">
+        select `id`,`length`,`format`,`regex`,`create_time`,`modified_time`,`is_delete` from ru_regex
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="length != null and length != ''">and `length` like CONCAT(CONCAT('%',#{length}),'%')</if>
+            <if test="format != null and format != ''">and format like CONCAT(CONCAT('%',#{format}),'%')</if>
+            <if test="regex != null and regex != ''">and regex = #{regex}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="modifiedTime != null and modifiedTime != ''">and modified_time = #{modifiedTime}</if>
+            <if test="isDelete != null and isDelete != ''">and is_delete = #{isDelete}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+</mapper>

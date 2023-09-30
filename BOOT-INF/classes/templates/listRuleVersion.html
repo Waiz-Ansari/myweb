@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Queclink Protocol Analysis Kit</title>
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/bootstrap-table/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-offset-6 col-xs-6">
+                <div class="input-group m-b-15">
+                    <span class="input-group-addon">Rule Version</span>
+                    <input type="text" class="form-control" id="ruleVersionInput">
+                    <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" id="ruleVersionSearch">Search</button>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="row m-b-15">
+            <table class="table table-bordered table-hover" id="ruleVersionList"></table>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-offset-4 col-xs-8">
+                <div class="input-group m-b-15">
+                    <span class="input-group-addon">File Name</span>
+                    <input type="text" class="form-control" id="fileName">
+                    <span class="input-group-addon">Create Name</span>
+                    <input type="text" class="form-control" id="createName">
+                    <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" id="fileSearch">Search</button>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="row m-b-15">
+            <table class="table table-bordered table-hover" id="fileList"></table>
+        </div>
+    </div>
+    <div id="rule" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Rule</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" id="ruleTable"></table>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-primary">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirm" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Confirm</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirmBtn" class="btn btn-primary ladda-button m-r-15" data-style="zoom-in"><span class="ladda-label">Yes</span></button>
+                    <button id="cancelBtn" class="btn btn-default ladda-button" data-style="zoom-in"><span class="ladda-label">No</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="version">Version:<span th:text="${VERSION}"></span></span>
+    <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+    <!--<script type="text/javascript" src="assets/bootstrap/popper.min.js"></script>-->
+    <script type="text/javascript" src="assets/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-table/bootstrap-table.js"></script>
+    <!--<script type="text/javascript" src="assets/bootstrap-table/bootstrap-table-zh-CN.js"></script>-->
+    <script type="text/javascript" src="assets/ladda/spin.min.js"></script>
+    <script type="text/javascript" src="assets/ladda/ladda.min.js"></script>
+    <script type="text/javascript" src="assets/parsley/parsley.min.js"></script>
+    <!--<script type="text/javascript" src="assets/parsley/zh_cn.js"></script>-->
+    <script type="text/javascript" src="js/listRuleVersion.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+1、正则表达式列表
+        url:   /ruleBase/list
+        请求方式：GET
+        参数：{
+            length：length,
+            format:format
+        }
+        返回： list:[{
+                        length : Length (Byte),
+                        format:  Range/Format,
+                        value : 正则表达式
+                    },
+                    {
+                       length : Length (Byte),
+                        format:  Range/Format,
+                        value : 正则表达式
+                    }
+                    ........................
+                 ]
+---------------------------------------------------
+2.编辑获取正则表达式
+        url:  /ruleBase/edit
+        请求方式：GET
+        请求参数：{
+              id:id  必传
+        },
+        返回： value：{
+              id:id,
+              length : Length (Byte),
+              format:  Range/Format,
+              regex : 正则表达式
+        }
+--------------------------------------------------
+3、保存正则表达式
+        url:  /ruleBase/save
+               请求方式：POST
+               请求参数：{
+                    length : Length (Byte),
+                    format:  Range/Format,
+                    regex : 正则表达式
+               }
+--------------------------------------------------
+4、删除正则表达式
+           url:  /ruleBase/delete
+               请求方式：POST
+               请求参数：{
+                   id:id 必传
+               }
+--------------------------------------------------
+5 更新正则表达式
+        url:  /ruleBase/update
+               请求方式：POST
+               请求参数：{
+                    id:id,   必传
+                    length : Length (Byte), 必填
+                    format:  Range/Format,  必填
+                    regex : 正则表达式
+               }

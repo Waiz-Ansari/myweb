@@ -1,0 +1,157 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/konva@8.3.14/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Konva HSV Image Demo</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+
+      #controls {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+    <div id="controls">
+      hue:
+      <input id="hue" type="range" min="0" max="259" step="1" value="150" />
+      saturation:
+      <input
+        id="saturation"
+        type="range"
+        min="-2"
+        max="10"
+        step="0.5"
+        value="0"
+      />
+      value:
+      <input id="value" type="range" min="-2" max="2" step="0.1" value="0" />
+    </div>
+    <script>
+      Konva.Image.fromURL('/image/unsplash-5.jpg', function (lion) {
+        var stage = new Konva.Stage({
+          container: 'container',
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+
+        var layer = new Konva.Layer();
+
+        lion.position({
+          x: 50,
+          y: 50,
+        });
+        lion.cache();
+        lion.filters([Konva.Filters.HSV]);
+        layer.add(lion);
+        stage.add(layer);
+
+        var sliders = ['hue', 'saturation', 'value'];
+        sliders.forEach(function (attr) {
+          var slider = document.getElementById(attr);
+          function update() {
+            lion[attr](parseFloat(slider.value));
+          }
+          slider.oninput = update;
+          update();
+        });
+      });
+    </script>
+  </body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body> -->
+
+<!-- <div id="imgg"></div> -->
+<!-- <div id="img">
+    <img >
+</div> -->
+
+
+
+
+
+    <!-- <img src="/image/360_F_279030771_pMo4u606vF6mscufYoroxD2r1Wt5zmPe.jpg" alt="" id="imgg">
+    <div id="main">
+
+    </div> -->
+    <!-- <script src="app.js"></script>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="position: relative; top: 000px; left: 000px; z-index: 1; display: inline;">
+        <svg class="svgClass" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="450px" height="900px">
+        <image xlink:href="/image/360_F_279030771_pMo4u606vF6mscufYoroxD2r1Wt5zmPe.jpg" width="450" height="900" />
+        <image xlink:href="/image/360_F_279030771_pMo4u606vF6mscufYoroxD2r1Wt5zmPe.jpg" class="ChangeImageColour ChangeImageColourClick" width="79" height="198" x="110px" y="100px" />
+        <image xlink:href="/image/360_F_279030771_pMo4u606vF6mscufYoroxD2r1Wt5zmPe.jpg" class="ChangeImageColour ChangeImageColourClick" width="79" height="198" x="150px" y="130px" /></svg></div> -->
+        <!-- Again, to avoid position and spacing issues with SVG, I have set the size of the < /svg> -->
+        
+<!--         
+<script>
+    var $shape = $( '.ChangeImageColour' );
+  $( '.ChangeImageColourClick' ).click(function() {
+            if ( $shape.attr( 'filter' ) )
+       $shape.removeAttr( 'filter' );
+    else
+       $shape.attr( 'filter', 'url(#desaturate)' );
+  });
+  </script>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.fillStyle = "red";
+ctx.fillRect(10, 10, 50, 50);
+
+function copy() {
+  var imgData = ctx.getImageData(10, 10, 50, 50);
+  ctx.putImageData(imgData, 10, 70);
+}
+</script>
+
+<button onclick="copy()">Copy</button>
+
+</body>
+</html>

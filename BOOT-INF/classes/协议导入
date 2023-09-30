@@ -1,0 +1,214 @@
+1、上传协议excel文件
+
+       请求url:  /file/upload
+       请求类型：POST
+       请求参数：
+             {
+               file：文件地址
+             },
+       返回：{
+            "code": 0,
+            "msg":"Operation is successful"
+       }
+--------------------------------------------------------------
+2、协议规则列表
+
+  请求url:  /protocol/list
+       请求类型：GET
+       返回：{
+            "key": ,
+            "value":协议规则
+       }
+
+3、协议解析
+
+请求url： /resolution
+      请求参数：
+           {
+             protocol："+RESP:GTDMR,2F0100,359464038394735,00007F9F,,0106,98000708,9800010F,20181116132655,0000,0000,,1,12.04,0,0.00,0,1,1,18,0,1,5,23,39,9,34,2,32,6,28,4,25,0,20190522000244,0,219019722475055,8938597231704105652f,20190522000247,00C0$"
+           },
+      请求类型：POST
+             返回：{
+                    "msg": "Operation is successful",
+                    "code": 0,
+                    "raw": "+RESP:GTDMR,2F0100,359464038394735,00007F9F,,0106,98000708,9800010F,20181116132655,0000,0000,,1,12.04,0,0.00,0,1,1,18,0,1,5,23,39,9,34,2,32,6,28,4,25,0,20190522000244,0,219019722475055,8938597231704105652f,20190522000247,00C0$",
+                    "protocol Type": "QMS",
+                    "content": {
+                        "command": {
+                            "value": "+RESP:GTDMR",
+                            "error code": 0
+                        },
+                        "DM Protocol Version": {
+                            "value": "2F0100",
+                            "error code": 3
+                        },
+                        "Unique ID": {
+                            "value": "359464038394735",
+                            "error code": 3
+                        },
+                        "Report Mask": {
+                            "value": "00007F9F",
+                            "error code": 3
+                        },
+                        "Device Name": {
+                            "value": "",
+                            "error code": 0
+                        },
+                        "Hardware Version": {
+                            "value": "0106",
+                            "error code": 3
+                        },
+                        "Firmware Version": {
+                            "value": "98000708",
+                            "error code": 3
+                        },
+                        "Last Firmware Version": {
+                            "value": "9800010F",
+                            "error code": 3
+                        },
+                        "Firmware Update Time": {
+                            "value": "20181116132655",
+                            "error code": 0
+                        },
+                        "Configuration Version": {
+                            "value": "0000",
+                            "error code": 3
+                        },
+                        "Last Configuration Version": {
+                            "value": "0000",
+                            "error code": 3
+                        },
+                        "Configuration Update Time": {
+                            "value": "",
+                            "error code": 0
+                        },
+                        "Main Power Connected": {
+                            "value": "1",
+                            "error code": 0
+                        },
+                        "Main Power Voltage": {
+                            "value": "12.04",
+                            "error code": 3
+                        },
+                        "Backup Battery Connected": {
+                            "value": "0",
+                            "error code": 0
+                        },
+                        "Battery Voltage": {
+                            "value": "0.00",
+                            "error code": 3
+                        },
+                        "Battery Percentage": {
+                            "value": "0",
+                            "error code": 3
+                        },
+                        "GSM State": {
+                            "value": "1",
+                            "error code": 3
+                        },
+                        "GPRS State": {
+                            "value": "1",
+                            "error code": 3
+                        },
+                        "CSQ RSSI": {
+                            "value": "18",
+                            "error code": 3
+                        },
+                        "CSQ BER": {
+                            "value": "0",
+                            "error code": 3
+                        },
+                        "GNSS On": {
+                            "value": "1",
+                            "error code": 0
+                        },
+                        "Satellites Number": {
+                            "value": "5",
+                            "error code": 3
+                        },
+                        "list": [
+                            {
+                                "Satellite(i) ID": {
+                                    "value": "23",
+                                    "error code": 3
+                                },
+                                "Satellite(i) Power": {
+                                    "value": "39",
+                                    "error code": 3
+                                }
+                            },
+                            {
+                                "Satellite(i) ID": {
+                                    "value": "9",
+                                    "error code": 3
+                                },
+                                "Satellite(i) Power": {
+                                    "value": "34",
+                                    "error code": 3
+                                }
+                            },
+                            {
+                                "Satellite(i) ID": {
+                                    "value": "2",
+                                    "error code": 3
+                                },
+                                "Satellite(i) Power": {
+                                    "value": "32",
+                                    "error code": 3
+                                }
+                            },
+                            {
+                                "Satellite(i) ID": {
+                                    "value": "6",
+                                    "error code": 3
+                                },
+                                "Satellite(i) Power": {
+                                    "value": "28",
+                                    "error code": 3
+                                }
+                            },
+                            {
+                                "Satellite(i) ID": {
+                                    "value": "4",
+                                    "error code": 3
+                                },
+                                "Satellite(i) Power": {
+                                    "value": "25",
+                                    "error code": 3
+                                }
+                            }
+                        ],
+                        "Last GNSS HDOP": {
+                            "value": "0",
+                            "error code": 3
+                        },
+                        "GNSS UTC Time": {
+                            "value": "20190522000244",
+                            "error code": 0
+                        },
+                        "SIM Status": {
+                            "value": "0",
+                            "error code": 3
+                        },
+                        "IMSI": {
+                            "value": "219019722475055",
+                            "error code": 3
+                        },
+                        "ICCID": {
+                            "value": "8938597231704105652f",
+                            "error code": 3
+                        },
+                        "Message Time": {
+                            "value": "20190522000247",
+                            "error code": 0
+                        },
+                        "Count Number": {
+                            "value": "00C0",
+                            "error code": 0
+                        },
+                        "Tail Character": {
+                            "value": "$",
+                            "error code": 0
+                        }
+                    }
+                }

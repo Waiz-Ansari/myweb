@@ -1,0 +1,172 @@
+{{!-- <!DOCTYPE html> --}}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {{!-- <link rel="stylesheet" href="/backend/public/appli.css"> --}}
+    <style>
+    body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #F8F8F8;
+    font-family: 'Roboto', sans-serif;
+}
+section.chat__section {
+    width: 800px;
+    max-width: 90%;
+    background: #fff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.brand {
+    padding: 20px;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+}
+.brand h1 {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #444;
+    margin-left: 10px;
+}
+.message__area{
+    height: 500px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-top: 40px;
+}
+textarea {
+    width: 90%;
+    border: none;
+    padding: 20px;
+    font-size: 16px;
+    outline: none;
+    overflow-y: hidden;
+    background: #FBFBFB;
+}
+
+.message {
+    padding: 20px; 
+    border-radius: 4px; 
+    margin-bottom: 40px;
+    width:300px;
+    grid-template-columns: 70%;
+    position:fixed;
+}
+.incoming {
+    width: 300px;
+    margin: 10px;
+    padding: 0px 10px 0px 10px;
+    background: #8F8BE8;
+    color: #fff;  
+}
+.outgoing {
+    margin: 10px;
+    padding: 0px 10px 0px 10px;
+    width :fit-content;
+    max-width: 300px;
+    background: #e9eafd;
+    color: #787986;
+    margin-left: auto;
+}
+.message h4 {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    color: #333;
+    font-size: 14px;
+}
+    </style>
+</head>
+<body>
+    {{!-- {{> navbar }}
+    <h1>application views</h1> --}}
+
+
+
+    {{!-- ============= --}}
+    {{!-- <h1>welcome to chat app</h1>
+    <a href="/login">login</a>
+    <a href="/secret">secret</a>
+    <a href="/signUp">signUp</a> --}}
+    {{!-- ============= --}}
+
+<div class="waiz">
+       <section class="chat__section">
+        <div class="brand">
+            <img class="imgg" width="60px"  height="50"src="https://cdn.pixabay.com/photo/2017/11/10/05/05/whatsapp-2935415_960_720.png" alt="">
+            <h1>Wassup</h1>
+        </div>
+        {{!-- masg area===== start--}}
+        <div class="message__area">
+            
+        {{!-- <div>
+            <textarea id="textarea" cols="30" rows="1" placeholder="Write a message..."></textarea>
+        </div> --}}
+    </section>
+  <div>
+            <textarea id="textarea" cols="30" rows="1" placeholder="Write a message..."></textarea>
+        </div>
+        </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    {{!-- <script src="./appli.js"></script> --}}
+    <script>
+        const socket = io()
+          let name;
+          let textarea = document.querySelector("#textarea")
+          let messagearea = document.querySelector(".message__area") 
+            do {
+            name=prompt("pleace enter your name:")
+            }while(!name)
+    textarea.addEventListener("keyup",(e)=>{
+        if(e.key === "Enter"){
+            sendmessage(e.target.value)
+        }
+    })
+    function sendmessage(mesg){
+        let msg = {
+            user:name,
+            message:mesg.trim()
+        }
+        //for msg append kerna ha 
+            appendmsg(msg,"outgoing")
+            textarea.value = "";
+            scrollToBottom()
+
+            //send to server
+            socket.emit('message',msg)
+    }
+    function appendmsg(msg,type){
+        let maindiv = document.createElement('div');
+        let className = type
+        maindiv.classList.add(className, "massage");
+
+        let markup = `
+        <h4>${msg.user}</h4>
+        <p>${msg.message}</p>
+        `
+        maindiv.innerHTML = markup
+        messagearea.appendChild(maindiv)
+    }
+    //recive massage
+    socket.on('message',(msg)=>{
+        appendmsg(msg,'incoming')
+        scrollToBottom()
+    })
+
+    //auto scroll function
+    function scrollToBottom(){
+        messagearea.scrollTop = messagearea.scrollHeight
+    }
+
+            
+    </script>
+</body>
+</html>

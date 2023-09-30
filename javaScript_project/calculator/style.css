@@ -1,0 +1,17 @@
+.gap{
+    margin: auto;
+}
+
+.flex{
+display: flex;
+}
+.flex-col{
+    flex-direction: column;
+}
+.item-center{
+    align-items: center;
+}
+button{
+    margin:10px;
+    padding:10px;
+}
